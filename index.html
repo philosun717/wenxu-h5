@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>闻绪 · 今日心绪处方</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="phone-shell" aria-label="闻绪今日心绪处方 H5 原型">
+      <section class="app-screen">
+        <div class="grain"></div>
+        <div id="view-root"></div>
+      </section>
+    </main>
+
+    <template id="tpl-start">
+      <article class="page page-start">
+        <div class="botanical botanical-a"></div>
+        <div class="brand-block">
+          <img class="logo" src="./assets/logo.jpg" alt="闻绪 WENXU" />
+          <h1>闻绪 WENXU</h1>
+          <p class="tagline">闻一缕香，解千般绪</p>
+          <p class="lead">把说不清的情绪，变成可以闻到的气味。</p>
+        </div>
+        <button class="primary-btn" data-action="go" data-view="knot">开始解结</button>
+      </article>
+    </template>
+
+    <template id="tpl-knot">
+      <article class="page page-knot">
+        <header class="page-head">
+          <p class="eyebrow">解结</p>
+          <h2>解开今天的心结</h2>
+          <p>有些情绪，不必被战胜。<br />只需被闻见，被梳理，被安放。</p>
+        </header>
+        <div class="sachet-stage static-pack">
+          <img src="./assets/combo.png" alt="闻绪香包产品组合展示" />
+        </div>
+        <div class="unlock-panel">
+          <p class="unlocked-copy show">你已经打开了一份属于今天的气味处方。</p>
+        </div>
+        <button class="primary-btn" id="diagnosisBtn" data-action="go" data-view="quiz">开始心绪问诊</button>
+      </article>
+    </template>
+
+    <template id="tpl-quiz">
+      <article class="page page-quiz">
+        <header class="page-head compact">
+          <p class="eyebrow" id="quizProgress">第 1 / 7 问</p>
+          <h2>你今天的情绪是什么味道？</h2>
+          <p>回答几个小问题，闻绪会为你开出一份今日心绪处方。</p>
+        </header>
+        <div class="question-card">
+          <h3 id="questionText"></h3>
+          <div id="optionList" class="option-list"></div>
+        </div>
+        <button class="primary-btn" id="nextQuestion" disabled>下一题</button>
+      </article>
+    </template>
+
+    <template id="tpl-match">
+      <article class="page page-match">
+        <header class="page-head">
+          <p class="eyebrow">五志匹配</p>
+          <h2>正在为你辨认今日心绪</h2>
+          <p id="matchCopy">正在辨认你的心绪……</p>
+        </header>
+        <div class="five-map" id="fiveMap"></div>
+        <p class="complete-copy hidden" id="matchDone">你的今日心绪，已经被闻见。</p>
+        <button class="primary-btn hidden" id="prescriptionBtn" data-action="go" data-view="prescription">查看我的处方</button>
+      </article>
+    </template>
+
+    <template id="tpl-prescription">
+      <article class="page page-prescription">
+        <header class="page-head compact">
+          <p class="eyebrow">今日心绪处方</p>
+          <h2 id="resultTitle"></h2>
+          <p>闻绪已为你辨认出今天的情绪气味。</p>
+        </header>
+        <div class="rx-card">
+          <div>
+            <span>情绪诊断</span>
+            <p id="emotionText"></p>
+          </div>
+          <div>
+            <span>气味处方</span>
+            <strong id="scentFormula"></strong>
+          </div>
+          <div>
+            <span>处方解释</span>
+            <p id="formulaText"></p>
+          </div>
+          <div>
+            <span>今日建议</span>
+            <p id="todayAdvice"></p>
+          </div>
+        </div>
+        <button class="primary-btn" data-action="go" data-view="cup">让这缕气味入杯</button>
+      </article>
+    </template>
+
+    <template id="tpl-cup">
+      <article class="page page-cup">
+        <header class="page-head compact">
+          <p class="eyebrow">入杯体验</p>
+          <h2>让这缕气味入杯</h2>
+          <p id="cupCaption">闻绪为你取出今日处方。</p>
+        </header>
+        <div class="cup-scene">
+          <img class="floating-pack" id="floatingPack" src="./assets/mood-si.png" alt="闻绪入杯体验" />
+          <div class="glass">
+            <div class="liquid" id="liquid"></div>
+            <div class="bubbles"></div>
+            <div class="glass-mark">闻绪</div>
+          </div>
+          <div class="steam steam-one"></div>
+          <div class="steam steam-two"></div>
+        </div>
+        <button class="primary-btn" id="cupNext" data-action="go" data-view="product">查看我的专属产品</button>
+      </article>
+    </template>
+
+    <template id="tpl-product">
+      <article class="page page-product">
+        <header class="page-head compact">
+          <p class="eyebrow">闻绪药房</p>
+          <h2>闻绪为你开出的这一缕香</h2>
+        </header>
+        <div class="product-card">
+          <img id="productImage" alt="推荐产品包装" />
+          <div class="product-info">
+            <h3 id="productName"></h3>
+            <p id="productTags"></p>
+            <dl>
+              <dt>核心香料</dt>
+              <dd id="productScent"></dd>
+              <dt>适用场景</dt>
+              <dd id="productScene"></dd>
+            </dl>
+          </div>
+        </div>
+        <button class="primary-btn" data-action="go" data-view="share">收下这份处方</button>
+      </article>
+    </template>
+
+    <template id="tpl-share">
+      <article class="page page-share">
+        <header class="page-head compact">
+          <p class="eyebrow">分享转化</p>
+          <h2>生成今日心绪处方卡</h2>
+        </header>
+        <div class="share-card" id="shareCard">
+          <p class="share-brand">闻绪 WENXU</p>
+          <h3>今日心绪处方</h3>
+          <strong id="shareMood"></strong>
+          <p id="shareMain"></p>
+          <p id="shareFormula"></p>
+          <p id="shareTip"></p>
+          <span>闻一缕香，解千般绪</span>
+        </div>
+        <canvas id="posterCanvas" width="750" height="1100" aria-label="处方卡预览"></canvas>
+        <div class="button-row">
+          <button class="secondary-btn" id="savePoster">保存处方卡 <span class="download-icon" aria-hidden="true">↓</span></button>
+          <button class="secondary-btn" id="sharePoster">分享</button>
+        </div>
+        <div class="share-sheet hidden" id="shareSheet">
+          <button class="platform-btn" type="button"><span class="wechat-icon">微</span>微信</button>
+          <button class="platform-btn" type="button"><span class="qq-icon">Q</span>QQ</button>
+          <button class="platform-btn" type="button"><span class="douyin-icon">抖</span>抖音</button>
+          <button class="platform-btn" type="button"><span class="red-icon">书</span>小红书</button>
+        </div>
+      </article>
+    </template>
+    <script src="./app.js"></script>
+  </body>
+</html>
